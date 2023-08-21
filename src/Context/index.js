@@ -1,5 +1,5 @@
 import { createContext,useState, useEffect} from "react";
-import {lineItemss}from "../index";
+import { getLinesItems , getLineItemsFetch,getEstimatedDeliveryLines} from "../Api";
 export const ShoppingCartContext = createContext()
 
 export const ShoppingCartProvider = ({children}) =>{
@@ -9,14 +9,36 @@ export const ShoppingCartProvider = ({children}) =>{
     const [TOTAL,setTotal] = useState(2382.3161);
     const [ESTIMATED_DELIVERY,setEstimateDelivery] = useState("Nov 24, 2021");
     const [count, setCount] = useState(3)
-    const [lineItems, setLineItems] = useState(lineItemss)
+    const [lineItems, setLineItems] = useState([])
     const [isLoadingFee, setIsLoadingFee] = useState(false)
+    const [isLoadingItems, setIsLoadingItems] = useState(false);
 
+
+    useEffect(()=>{
+    
+        getItems();
+   
+       
+    },[])
     useEffect(()=>{
         if(isLoadingFee) {
             calculateFees()
         }
     },[isLoadingFee])
+    const getItems =  async() =>{
+        try {
+            setIsLoadingItems(true)
+            const itemsResult = await getLineItemsFetch();
+            console.log("itemsResult ",itemsResult);
+            setTimeout(()=>{
+                setIsLoadingItems(false);
+                setLineItems(itemsResult);
+            },2000)
+        }
+        catch{
+            console.log("Error")
+        }
+    }
     const calculateFees = () => {
         let subtotal = 0;
         let tax = 0;
@@ -53,7 +75,8 @@ export const ShoppingCartProvider = ({children}) =>{
             ESTIMATED_DELIVERY,
             setEstimateDelivery,
             setIsLoadingFee,
-            setIsLoadingFee
+            isLoadingItems, 
+            setIsLoadingItems
 
         }}>
         {children}
