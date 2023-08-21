@@ -10,7 +10,7 @@ export const ShoppingCartProvider = ({children}) =>{
     const [ESTIMATED_DELIVERY,setEstimateDelivery] = useState("Nov 24, 2021");
     const [count, setCount] = useState(3)
     const [lineItems, setLineItems] = useState(lineItemsOrigin)
-
+    const [isLoadingFee, setIsLoadingFee] = useState(false)
     return (
         <ShoppingCartContext.Provider value ={{
             count,
@@ -24,7 +24,9 @@ export const ShoppingCartProvider = ({children}) =>{
             TOTAL,
             setTotal,
             ESTIMATED_DELIVERY,
-            setEstimateDelivery
+            setEstimateDelivery,
+            setIsLoadingFee,
+            setIsLoadingFee
 
         }}>
         {children}
