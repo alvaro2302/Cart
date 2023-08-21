@@ -1,0 +1,15 @@
+.textDelivery{
+    text-align: end;
+    
+}
+.textDeliveryRemove {
+    width:100%;
+    text-align: end;
+    text-decoration-line: underline;
+    background-color: transparent;
+    border: 0;
+    
+}
+.detailsDelivery{
+    margin-right: 2%;
+}
