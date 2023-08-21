@@ -8,12 +8,12 @@ const CartFee = ({SUBTOTAL, HST, TOTAL,Shipping}) => {
  return(
     <div>
         <div className="FeeDetails">
-                        <div>
-                            <ul>
-                                <h3>{"Subtotal"}</h3>
-                                <h3>{"Taxes (estimated)"}</h3>
-                                <h3>{"Shipping"}</h3>
-                                <h3>{"Total"}</h3>
+                        <div >
+                            <ul >
+                                <h3 style={{textAlign:"start"}}>{"Subtotal"}</h3>
+                                <h3 style={{textAlign:"start"}}>{"Taxes (estimated)"}</h3>
+                                <h3 style={{textAlign:"start"}}>{"Shipping"}</h3>
+                                <h3 style={{textAlign:"start"}}>{"Total"}</h3>
                             </ul>
                         </div>
                         <div className="priceDetails">
