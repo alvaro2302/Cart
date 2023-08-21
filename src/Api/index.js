@@ -13,3 +13,14 @@ export const getLineItemsFetch = () => {
                     .catch(data => console.log(data));
     return result;
 }
+
+export const getEstimatedDeliveryLines = (code,lineItems) =>{
+
+    return axios.post(APIURL + "/delivery",{
+        "codePostal": code,
+        "lineItems":lineItems
+    })
+    .then((res) => res.data.data)
+    .catch((err) => console.log(err));
+   
+}

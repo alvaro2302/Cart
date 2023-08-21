@@ -2,6 +2,7 @@ import React,{useContext} from "react";
 import "./DetailsDelivery.css";
 import { ShoppingCartContext } from "../../Context";
 import Skeleton, { SkeletonTheme } from 'react-loading-skeleton'
+import "react-loading-skeleton/dist/skeleton.css";
 const DetailsDelivery = ({item}) => {
     const {price} = item
     const context = useContext(ShoppingCartContext);
@@ -16,7 +17,6 @@ const DetailsDelivery = ({item}) => {
         setLineItems(newLineItems);
         setIsLoadingFee(true);
     }
-   
     
     return(
         <div className="detailsDelivery ">

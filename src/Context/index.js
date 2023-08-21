@@ -1,4 +1,4 @@
-import { createContext,useState, useEffect} from "react";
+import { createContext, useEffect, useState } from "react";
 import { getLinesItems , getLineItemsFetch,getEstimatedDeliveryLines} from "../Api";
 export const ShoppingCartContext = createContext()
 
@@ -13,18 +13,19 @@ export const ShoppingCartProvider = ({children}) =>{
     const [isLoadingFee, setIsLoadingFee] = useState(false)
     const [isLoadingItems, setIsLoadingItems] = useState(false);
 
-
     useEffect(()=>{
     
         getItems();
    
        
     },[])
+
     useEffect(()=>{
         if(isLoadingFee) {
             calculateFees()
         }
     },[isLoadingFee])
+
     const getItems =  async() =>{
         try {
             setIsLoadingItems(true)
@@ -39,6 +40,22 @@ export const ShoppingCartProvider = ({children}) =>{
             console.log("Error")
         }
     }
+    const getEstimatedDelivery = async(cuponCode) =>{
+        try {
+            setIsLoadingItems(true)
+            const lineItemsEstimated = await getEstimatedDeliveryLines(cuponCode,lineItems);
+            console.log("lineItemsEstimated",lineItemsEstimated)
+            setTimeout(()=>{
+                setIsLoadingItems(false);
+                setLineItems(lineItemsEstimated);
+            },2000)
+        }
+        catch{
+            console.log("Error")
+        }
+    }
+
+
     const calculateFees = () => {
         let subtotal = 0;
         let tax = 0;
@@ -60,6 +77,7 @@ export const ShoppingCartProvider = ({children}) =>{
         setTotal(total);
         setIsLoadingFee(false);
     }
+
     return (
         <ShoppingCartContext.Provider value ={{
             count,
@@ -74,9 +92,11 @@ export const ShoppingCartProvider = ({children}) =>{
             setTotal,
             ESTIMATED_DELIVERY,
             setEstimateDelivery,
+            isLoadingFee,
             setIsLoadingFee,
-            isLoadingItems, 
-            setIsLoadingItems
+            Shipping,
+            isLoadingItems,
+            getEstimatedDelivery
 
         }}>
         {children}

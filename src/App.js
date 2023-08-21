@@ -1,6 +1,6 @@
 import './App.css';
-import Home from './Pages/Home';
 import { ShoppingCartProvider } from './Context';
+import Home from './Pages/Home';
 function App() {
   return (
     <ShoppingCartProvider>

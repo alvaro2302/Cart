@@ -1,8 +1,8 @@
 import React,{useContext}from "react";
 import ItemProduct from "../ItemProduct/ItemProduct";
-import CartFee from "../CartFeee/CartFee";
+import CartFee from "../CartFees/CartFee";
 import { ShoppingCartContext } from "../../Context";
-import Skeleton, { SkeletonTheme } from 'react-loading-skeleton'
+import { lineItems, lineItems as linesItemsDefault } from "../../index";
 import "./Cart.css"
 const Cart = ({items,SUBTOTAL, HST, TOTAL, ESTIMATED_DELIVERY,Shipping}) =>{
     const defaultLoading = {
@@ -15,9 +15,10 @@ const Cart = ({items,SUBTOTAL, HST, TOTAL, ESTIMATED_DELIVERY,Shipping}) =>{
         swatchTitle: "Grey"
     }
     
-    const datesFee = {SUBTOTAL, HST, TOTAL,Shipping}; 
-    const context = useContext(ShoppingCartContext); 
-    const {setCount,count,setLineItems,lineItems,setIsLoadingFee,isLoadingItems} = context;
+    const datesFee = {SUBTOTAL, HST, TOTAL,Shipping};
+    const context = useContext(ShoppingCartContext);
+    
+    const {setCount,count,setLineItems,lineItems,setIsLoadingFee, isLoadingItems} = context;
     const lineItemsOrigins = [...lineItems];
     const addItems = () => {
         let newCount = count;
@@ -38,32 +39,32 @@ const Cart = ({items,SUBTOTAL, HST, TOTAL, ESTIMATED_DELIVERY,Shipping}) =>{
             
             <div >
                 <h1> You Cart</h1>
-              
-                    <button style={{margin:"1% 1% 1% 1%"}} onClick={ addItems}>
-                        <h2>Add</h2>
-                    </button>
-                    { !isLoadingItems &&( 
+                <button style={{margin:"1% 1% 1% 1%"}} onClick={ addItems}>
+                    <h2>Add</h2>
+                </button>
+                { !isLoadingItems &&( 
 
-                            <div>
-                                {   
-                                    items.map((item,index)=>(
+                
+                    <div>
+                        {   
+                            items.map((item,index)=>(
 
-                                        <ItemProduct key={`item-${index}`} item = {item}/>
-                                        
-                                    ))
-                                }
-                            </div>)
-                    }
-                    {
-                        isLoadingItems &&(
-                            <div>
-
-                                <ItemProduct key={`item-${0}`} item = {defaultLoading}/>
-                                        
-                            </div>
-                            )
-                    }
-                    <CartFee {...datesFee}/>
+                                <ItemProduct key={`item-${index}`} item = {item}/>
+                                
+                            ))
+                        }
+                    </div>)
+                }
+                {
+                    isLoadingItems &&(
+                    <div>
+                    
+                        <ItemProduct key={`item-${0}`} item = {defaultLoading}/>
+                                
+                    </div>
+                    )
+                }
+                <CartFee {...datesFee}/>
 
             </div>
     )

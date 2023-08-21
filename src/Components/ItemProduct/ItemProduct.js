@@ -1,8 +1,8 @@
 import React from "react";
 import ItemProducDetails from "../ItemProductDetails/ItemProductDetails"
 import DetailsDelivery from "../DetailsDelivery/DetailsDelivery";
-
 const ItemProduct = ({item}) => {
+    
     return (
         <div className = "items">
             
