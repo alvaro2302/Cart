@@ -1,5 +1,5 @@
 import { createContext,useState } from "react";
-import {lineItems as lineItemsOrigin}from "../index";
+import {lineItemss}from "../index";
 export const ShoppingCartContext = createContext()
 
 export const ShoppingCartProvider = ({children}) =>{
@@ -9,7 +9,7 @@ export const ShoppingCartProvider = ({children}) =>{
     const [TOTAL,setTotal] = useState(2382.3161);
     const [ESTIMATED_DELIVERY,setEstimateDelivery] = useState("Nov 24, 2021");
     const [count, setCount] = useState(3)
-    const [lineItems, setLineItems] = useState(lineItemsOrigin)
+    const [lineItems, setLineItems] = useState(lineItemss)
     const [isLoadingFee, setIsLoadingFee] = useState(false)
     return (
         <ShoppingCartContext.Provider value ={{
