@@ -23,7 +23,7 @@ const Cart = ({items,SUBTOTAL, HST, TOTAL, ESTIMATED_DELIVERY,Shipping}) =>{
                         }
                     </div>
                
-            
+                    <CartFee {...datesFee}/>
 
             </div>
     )
