@@ -4,7 +4,8 @@ import { ShoppingCartContext } from "../../Context";
 import Skeleton, { SkeletonTheme } from 'react-loading-skeleton'
 import "react-loading-skeleton/dist/skeleton.css";
 const DetailsDelivery = ({item}) => {
-    const {price} = item
+    const {price,estimatedDeliveryDate} = item
+    const deliveryEstimated = estimatedDeliveryDate ? estimatedDeliveryDate: "Dec 2 - Dec 15";
     const context = useContext(ShoppingCartContext);
     const {lineItems,setLineItems,setIsLoadingFee,isLoadingItems} = context;
     const removeLineItem = (lineItemId) =>{
@@ -24,7 +25,7 @@ const DetailsDelivery = ({item}) => {
                 <ul>
 
                    {isLoadingItems? <Skeleton width={100}/> : <h4 className="textDelivery">{`$${price}`}</h4>}
-                   {isLoadingItems? <Skeleton width={100}/> : <h4>{"Estimated Delivery Date Dec 2 - Dec 15"}</h4>}
+                   {isLoadingItems? <Skeleton width={100}/> : <h4>{`Estimated Delivery ${deliveryEstimated}`}</h4>}
                     
                   
                    {isLoadingItems? <Skeleton width={100}/> :<button onClick={() => removeLineItem(item.id)} className="textDeliveryRemove" >{"Remove"}</button>}
